@@ -1,0 +1,116 @@
+#signup{
+    text-align: center;
+    /* display:-ms-flexbox; */
+    display: flex;
+    /* -ms-flex-align: center; */
+    justify-content: center;
+}
+
+#signup .container-fluid{
+    padding:7% 13%;
+}
+
+#signup .div-border{
+    padding:1.5rem 2rem;
+}
+
+#signup input{
+    border: solid 2px #ced4da;
+}
+
+.signup-wrapper{
+    max-width: 25rem;
+    margin: 0 auto;
+}
+
+.big-heading{
+    font-size: 3rem;
+}
+
+/* .form-signup{
+    padding: 1rem 2.5rem;
+} */
+
+#signup .subheading{
+    color:#8E8E8E;
+    font-size: 1.2rem;
+    font-weight: 600;
+    /* line-height: 1.2rem; */
+} 
+
+.google-button{
+    display: inline-block;
+    width: 100%;
+}
+
+.google-icon-signup{
+    margin:0 0.5rem 0 0;
+}
+
+.margin_fifteen{
+    margin:0 auto 15px;
+}
+
+.margin_ten{
+    margin:0 auto 10px;
+}
+/* 
+.line-signup{
+    width:105px;
+} */
+
+hr{
+    display: inline-block;
+    width: 41%;
+}
+
+.signup-button{
+    display:inline-block;
+    width:100%;
+    margin:0.25rem 0 1rem;
+}
+
+.p-fadedcolor{
+    color:#8E8E8E;
+    font-size: 0.8rem;
+}
+
+.faded-links{
+    color:#8E8E8E;
+    font-weight: 600;
+}
+
+.faded-links:hover{
+   text-decoration: none;
+   color:#8E8E8E;
+}
+
+.account-div-signup{
+    margin:1.25rem auto;
+    padding:1rem 0;
+}
+
+.login-link{
+    margin:0 0 0 5px;
+    font-size: 1rem;
+}
+
+/* @media(max-width: 992px){ */
+    /* .signup-wrapper{
+        width: 100%;
+        margin:auto
+    }
+    .account-div-signup{
+        width: 100%;
+        margin:10px auto;
+    } */
+    /* .#signup .container-fluid{
+        padding: 5% 25% 7%;
+    }
+}
+
+@media(max-width:576px){
+    .#signup .container-fluid{
+        padding:5% 15% 7%;
+    }
+} */

@@ -1,0 +1,84 @@
+#contact-us{
+    display: flex;
+    display: -ms-flexbox;
+    -ms-flex-align: center;
+    text-align: center;
+}
+
+#contact-us .input{
+    margin-bottom: 1.5rem;
+}
+
+#contact-us .container-fluid{
+    padding:4% 13%;
+}
+
+.header-contact-us{
+    text-align: center;
+}
+
+.main-heading{
+    margin-bottom: 1rem;
+}
+
+#contact-us .subheading{
+    margin-bottom: 3rem;
+    color:#8E8E8E;
+}
+
+.contacts-container{
+    display: flex;
+    margin-bottom: 1rem;
+}
+
+.contacts-logo{
+    margin:0 2rem 0 1rem;
+}
+
+.message-container{
+    margin:0 auto;
+    max-width: 30rem;
+}
+
+#contact-us input{
+    margin-bottom: 1rem;
+    border: solid 2px #ced4da;
+}
+
+#contact-us textarea{
+    border: solid 2px #ced4da;
+}
+
+#contact-us form{
+    padding: 2rem;
+}
+
+.contact-us-question{
+    margin-bottom: 1rem;
+}
+
+.footer{
+    margin-top:4rem;
+    color:#8E8E8E;
+    display: flex;
+    justify-content: center;
+    padding-top:1rem;
+}
+
+/* .icon{
+    height: 0.1rem;
+    width: 0.1rem;
+} */
+.email{
+    margin-left:1rem;
+    font-weight:700;
+    font-size: 1.2rem;
+}
+
+@media(max-width:576px){
+    .contact-us-button{
+        display: flex;
+        justify-content: center;
+    }
+}
+

@@ -1,0 +1,134 @@
+/* #forgot-password
+{
+    margin-top: -70px;
+    padding: 0;
+    font-family: sans-serif;
+    background-position: center;
+    background-size: cover;
+}
+.Reset-Password
+{
+    width: 350px;
+    box-shadow: 0 0 3px 0 rgba(0,0,0,0.3);
+    background: white;
+    padding: 20px;
+    margin: 8% auto 0;
+    text-align: center;
+}
+.Reset-Password h1
+{
+    color: #0a0a0a;
+    margin-bottom: 30px;
+    font-size: 20px;
+}
+.input-box
+{
+    border-radius: 10px;
+    padding: 13px;
+    margin: 10px 0;
+    width: 100%;
+    border: 1px solid gray;
+    outline: none;
+    background-color: whitesmoke;
+}
+#forgot-password button
+{
+    color: white;
+    width: 100%;
+    padding: 8px;
+    border-radius: 8px;
+    font-size: 16px;
+    margin: 10px 0;
+    border: none;
+    cursor: pointer;
+}
+.send-link-btn
+{
+    background-color: #1c8adb;
+}
+#forgot-password hr
+{
+    margin-top: 20px;
+    width: 80%;
+}
+.or
+{
+    background-color: white;
+    width: 30px;
+    margin: -19px auto 10px;
+
+}
+#forgot-password img
+{
+    width: 130px;
+    margin-top: -10px;
+}
+.info{
+    margin-top: -20px;
+    text-align: center;
+    font-family: calibri;
+}
+.info1 h1{
+    text-align: center;
+    font-size: 15px;
+    font-family: sans-serif;
+}
+.back{
+    width: 370px;
+    box-shadow: 0 0 3px 0 rgba(0,0,0,0.3);
+    background-color: whitesmoke;
+    padding: 9px;
+    margin: -18px;
+    margin-left: -18.8px;
+    margin-top: 75px;
+} */
+
+#forgot-password{
+    text-align: center;
+}
+
+#forgot-password .container-fluid{
+    padding:7% 13%;
+}
+
+.forgot-page-wrapper{   
+    padding:1.5rem 2rem;
+    max-width: 25rem;
+    margin:0 auto;
+}
+
+/* .main-wrapper{
+} */
+
+#forgot-password h1{
+    margin:0.5rem 0 1rem 0;
+}
+
+.forgot-subheading{
+    margin-bottom: 1.5rem;
+    color:#8E8E8E;
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+.forgot-input{
+    margin-bottom: 1rem;
+}
+
+.forgot-button{
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.forgot-or-div{
+    margin-bottom: 1rem;
+}
+
+.forgot-lower-div{
+    margin-top:1.25rem;
+    padding:1rem;
+}
+
+.password-input{
+    margin-bottom: 1rem;
+}
