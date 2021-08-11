@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./Contact.css";
+import ContactSvg from "./ContactSvg";
 function Contact() {
     const [contactData, setContactdata] = useState({
         userName: "",
@@ -57,9 +58,9 @@ function Contact() {
                             Have some questions? Feel free to contact us.
                         </p>
                     </div>
-                    {/* <div className="row">
-                        <div className="col-md-6">
-                            <div className="contacts-container">
+                    <div className="row">
+                        <div className="col-lg-6">
+                            {/* <div className="contacts-container">
                                 <div className="contacts-logo">
                                     <i className="far fa-envelope fa-2x"></i>
                                 </div>
@@ -77,53 +78,57 @@ function Contact() {
                                     <p>navdeepsaini07</p>
                                     <p>parshant_yadav321</p>
                                     <p>pratik_Op</p>
-                                </div>
+                                </div> */}
+                            {/* </div> */}
+                            <div className="contact-image">
+                                <ContactSvg />
                             </div>
-                        </div> */}
-                    <div className=" message-container">
-                        <div className="div-border">
-                            <form onSubmit={submit}>
-                                <input
-                                    onChange={handleChange}
-                                    value={contactData.userEmail}
-                                    className="form-control input"
-                                    type="email"
-                                    name="userEmail"
-                                    required
-                                    placeholder="Email"
-                                />
-                                <input
-                                    onChange={handleChange}
-                                    value={contactData.userName}
-                                    className="form-control input"
-                                    type="text"
-                                    name="userName"
-                                    required
-                                    autoCapitalize="off"
-                                    placeholder="Full Name"
-                                />
-                                <textarea
-                                    onChange={handleChange}
-                                    value={contactData.userMessage}
-                                    className="contact-us-question form-control input"
-                                    type="text"
-                                    required
-                                    name="userMessage"
-                                    placeholder="Your Question or Suggestion..."
-                                />
-                                {condition ? <p style={{ color: "green" }}>Your message or suggestion is submitted.</p> : null}
-                                <div className="contact-us-button">
-                                    <button className=" btn btn-primary" type="submit">
-                                        SEND MESSAGE
-                                    </button>
-                                </div>
-                            </form>
+                        </div>
+                        <div className=" col-lg-6 right-div">
+                            <div className="div-border wrapper-contact">
+                                <form onSubmit={submit}>
+                                    <input
+                                        onChange={handleChange}
+                                        value={contactData.userEmail}
+                                        className="form-control input"
+                                        type="email"
+                                        name="userEmail"
+                                        required
+                                        placeholder="Email"
+                                    />
+                                    <input
+                                        onChange={handleChange}
+                                        value={contactData.userName}
+                                        className="form-control input"
+                                        type="text"
+                                        name="userName"
+                                        required
+                                        autoCapitalize="off"
+                                        placeholder="Full Name"
+                                    />
+                                    <textarea
+                                        onChange={handleChange}
+                                        value={contactData.userMessage}
+                                        className="contact-us-question form-control input"
+                                        type="text"
+                                        required
+                                        name="userMessage"
+                                        placeholder="Your Question or Suggestion..."
+                                    />
+                                    {condition ? <p style={{ color: "green" }}>Your message or suggestion is submitted.</p> : null}
+                                    <div className="contact-us-button">
+                                        <button className=" btn btn-primary" type="submit">
+                                            SEND MESSAGE
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
-                    <div className="footer">
+                    {/* <div className="footer">
                         <i className="far fa-envelope fa-2x"></i>
                         <p className="email">quick-querysupport@gmail.com</p>
-                    </div>
+                    </div> */}
                 </div>
             </div>
             {/* </div> */}

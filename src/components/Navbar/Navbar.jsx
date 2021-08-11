@@ -20,7 +20,7 @@ function Navbar() {
     // }
 
     return (
-        <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+        <nav className="navbar navbar-custom navbar-expand-lg navbar-dark">
             <Link to="/home" className="navbar-brand">
                 Quick-Query
             </Link>
@@ -42,17 +42,17 @@ function Navbar() {
                             Home
                         </Link>
                     </li>
-                    <li className="nav-item">
+                    <li className="nav-item active">
                         <Link className="nav-link" to="/posts">
                             Add a Post
                         </Link>
                     </li>
-                    <li className="nav-item">
+                    <li className="nav-item active">
                         <Link className="nav-link" to="/contact">
                             Contact Us
                         </Link>
                     </li>
-                    <li className="nav-item dropdown">
+                    <li className="nav-item dropdown profile-dropdown">
                         <a
                             className="nav-link dropdown-toggle"
                             href="#profile"
@@ -69,7 +69,7 @@ function Navbar() {
                             />
                         </a>
                         <div
-                            className="dropdown-menu dropdown-menu-right"
+                            className="dropdown-menu"
                             aria-labelledby="navbarDropdown"
                         >
                             <Link className="dropdown-item" to="/profile">

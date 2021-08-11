@@ -1,4 +1,7 @@
 import React from "react";
+import ThumbUpIcon from '@material-ui/icons/ThumbUp';
+import ThumbDownIcon from '@material-ui/icons/ThumbDown';
+// import CommentIcon from '@material-ui/icons/Comment';
 function PreviousAnswers(props) {
   // const [previousAnswerspage, setPreviousAnswerspage] = useState({
   //   upvoteHook: props.likes,
@@ -125,7 +128,7 @@ function PreviousAnswers(props) {
     <div className="answer">
       <hr />
       <br />
-      <h5 className="final-answer">{props.answer}</h5>
+      <h4 className="final-answer">{props.answer}</h4>
       {/* {previousAnswerspage.upvoteHook}
       <button
         name="upvoteHook"
@@ -142,9 +145,20 @@ function PreviousAnswers(props) {
       >
         -
       </button> */}
-      <span className="details">
-        answered by: {props.userAnswered} on {props.timeAnswered}
-      </span>
+      <div className="details">
+        <div className="ui-icons-questions">
+          <button className="button-style like-question-1" style={{ color: "#8E8E8E" }}>
+            <ThumbUpIcon />
+          </button>
+          <button className="button-style" style={{ color: "#8E8E8E" }}>
+            <ThumbDownIcon />
+          </button>
+          {/* <CommentIcon /> */}
+        </div>
+        <div>
+          Answered by {props.userAnswered} on {props.timeAnswered}
+        </div>
+      </div>
       {/* <form onSubmit={submit}>
         <button
           value={previousAnswerspage.upvoteHook}

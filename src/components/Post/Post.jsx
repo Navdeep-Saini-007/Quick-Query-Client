@@ -69,6 +69,11 @@ function Post(props) {
         <section id="home">
             <div className="container-fluid">
                 <div className="home-page-wrapper">
+                    <div style={{ textAlign: "center" }}>
+                        <h1 style={{ marginBottom: "1rem" }}>Posts</h1>
+                        <p style={{ marginBottom: "2rem", fontSize: "1.5rem", color: "#8E8E8E" }}>Share your ideas here</p>
+                    </div>
+
                     <div className="user-space">
                         <div className="user-details">
                             <img
@@ -79,13 +84,13 @@ function Post(props) {
                             <span className="user-name">{props.user.userName}</span>
                         </div>
                         <form onSubmit={submit}>
-                            <div className="form-group">
+                            <div className="enter-question">
                                 <textarea
                                     onChange={handleChange}
                                     required
                                     name="post"
                                     value={postData.post}
-                                    className="question-input form-control"
+                                    className="question-input"
                                     type="text"
                                     placeholder="Add a post..."
                                 />

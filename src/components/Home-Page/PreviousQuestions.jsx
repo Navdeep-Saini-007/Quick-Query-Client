@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import PreviousAnswers from "./PreviousAnswers";
+import CreateIcon from '@material-ui/icons/Create';
 
 function PreviousQuestions(props) {
     const [previousquestionsPage, setPreviousquestionspage] = useState({
@@ -7,6 +8,8 @@ function PreviousQuestions(props) {
         answers: "",
         userAnswered: "",
     });
+
+    // const [answer, setAnswer] = useState(false);
 
     const [isSubmitted, setIssubmitted] = useState(false);
 
@@ -52,17 +55,26 @@ function PreviousQuestions(props) {
 
     return (
         <div className="previous-questions">
-            <div className="user-details">
-                <img
+            {/* <div className="user-details"> */}
+            {/* <img
                     className="user-profile"
                     src="images/Sign-up-logo.png"
                     alt="profile-in-div"
-                />
-                <span className="user-name">{props.userName}</span>
-            </div>
+                /> */}
+            {/* <div className="user-name"><span style={{ borderBottom: "1px solid #8E8E8E" }}>{props.userName} asked on {props.timeAsked}</span></div> */}
+            {/* </div> */}
             <div>
                 <h4>{props.question}</h4>
-                <span className="details">asked on {props.timeAsked}</span>
+                {/* <div><CreateIcon /></div> */}
+                {/* <div className="details">Asked by {props.userName} on {props.timeAsked}</div> */}
+                <div className="details">
+                    <button className="button-style" style={{ color: "#8E8E8E" }} >
+                        <CreateIcon />  Answer Now
+                    </button>
+                    <div>
+                        Asked by {props.userName} on {props.timeAsked}
+                    </div>
+                </div>
                 <div>
                     {props.answer.map((answer, index) => (
                         <PreviousAnswers
@@ -77,15 +89,17 @@ function PreviousQuestions(props) {
                     ))}
                 </div>
                 <form className="answer-input" onSubmit={submit}>
-                    <textarea
-                        onChange={handleChange}
-                        name="answers"
-                        value={previousquestionsPage.answers}
-                        className="form-control question-input"
-                        type="text"
-                        placeholder="answer here..."
-                    />
-                    <button className="btn question-button btn-outline-primary">Submit</button>
+                    <div className="enter-question">
+                        <textarea
+                            onChange={handleChange}
+                            name="answers"
+                            value={previousquestionsPage.answers}
+                            className="question-input"
+                            type="text"
+                            placeholder="answer here..."
+                        />
+                        <button className="btn question-button btn-outline-primary">Submit</button>
+                    </div>
                 </form>
             </div>
         </div>

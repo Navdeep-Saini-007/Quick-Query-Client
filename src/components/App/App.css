@@ -16,6 +16,9 @@ body{
   }
   
   .div-border{
+    background: #fff;
+  border-radius: 7px;
+  box-shadow: 0 2px 5px #ccc;
     padding:0.6rem;
     border: solid 2px #ced4da;
     border-radius: 2%;
@@ -43,4 +46,6 @@ body{
 
   .post{
     font-weight: normal;
+    font-size: 1.2rem;
+    line-height: 1.3;
   }

@@ -95,22 +95,14 @@ hr{
     font-size: 1rem;
 }
 
-/* @media(max-width: 992px){ */
-    /* .signup-wrapper{
-        width: 100%;
-        margin:auto
-    }
-    .account-div-signup{
-        width: 100%;
-        margin:10px auto;
-    } */
-    /* .#signup .container-fluid{
-        padding: 5% 25% 7%;
+@media(max-width: 992px){
+    #signup .container-fluid{
+        padding: 7% 13%;
     }
 }
 
 @media(max-width:576px){
-    .#signup .container-fluid{
-        padding:5% 15% 7%;
+    #signup .container-fluid{
+        padding:13%;
     }
-} */
+}

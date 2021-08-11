@@ -107,7 +107,7 @@
 .forgot-subheading{
     margin-bottom: 1.5rem;
     color:#8E8E8E;
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     font-weight: 600;
 }
 
@@ -131,4 +131,16 @@
 
 .password-input{
     margin-bottom: 1rem;
+}
+
+@media(max-width:992px){
+    #forgot-password .container-fluid{
+        padding:7% 13%;
+    }
+}
+
+@media(max-width:576px){
+    #forgot-password .container-fluid{
+        padding:13%;
+    }
 }
