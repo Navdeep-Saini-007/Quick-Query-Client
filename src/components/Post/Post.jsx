@@ -2,7 +2,7 @@ import { React, useState, useEffect } from "react";
 import PreviousPosts from "./PreviousPosts";
 import "../Home-Page/Home.css";
 function Post(props) {
-    const [postData, setPostdata] = useState({ post: "", user: null });
+    const [postData, setPostdata] = useState({ post: "", user: "" });
 
     const [serverData, setServerdata] = useState([]);
 
@@ -14,7 +14,7 @@ function Post(props) {
             return {
                 ...prevValue,
                 [name]: value,
-                user: props.user.userName,
+                user: sessionStorage.getItem("name")
             };
         });
     }
@@ -38,7 +38,7 @@ function Post(props) {
             .then((server) => {
                 console.log(server);
                 setIsposted(true);
-                setPostdata({ post: "", user: null });
+                setPostdata({ post: "", user: "" });
             })
             .catch((err) => {
                 console.log(err);
@@ -70,8 +70,7 @@ function Post(props) {
             <div className="container-fluid">
                 <div className="home-page-wrapper">
                     <div style={{ textAlign: "center" }}>
-                        <h1 style={{ marginBottom: "1rem" }}>Posts</h1>
-                        <p style={{ marginBottom: "2rem", fontSize: "1.5rem", color: "#8E8E8E" }}>Share your ideas here</p>
+                        <p style={{ marginBottom: "2rem", fontSize: "1.5rem", color: "#8E8E8E" }}>Share your ideas or job/internship opportunities here.</p>
                     </div>
 
                     <div className="user-space">
@@ -81,7 +80,7 @@ function Post(props) {
                                 src="images/Sign-up-logo.png"
                                 alt="profile-in-div"
                             />
-                            <span className="user-name">{props.user.userName}</span>
+                            <span className="user-name">{sessionStorage.getItem("name")}</span>
                         </div>
                         <form onSubmit={submit}>
                             <div className="enter-question">
@@ -110,6 +109,8 @@ function Post(props) {
                             post={serverData.post}
                             userName={serverData.user}
                             timePosted={serverData.timePosted}
+                            likes={serverData.upVotes}
+                            dislikes={serverData.downVotes}
                         />
                     ))}
                 </div>

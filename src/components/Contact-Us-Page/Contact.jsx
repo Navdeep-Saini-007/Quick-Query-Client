@@ -16,6 +16,8 @@ function Contact() {
             return {
                 ...prevValue,
                 [name]: value,
+                userName: sessionStorage.getItem("name"),
+                userEmail: sessionStorage.getItem("email")
             };
         });
     }
@@ -53,33 +55,12 @@ function Contact() {
             <div className="container-fluid">
                 <div className="contact-us-wrapper">
                     <div className="header-contact-us">
-                        <h1 className="main-heading">Contact Us</h1>
                         <p className="subheading">
                             Have some questions? Feel free to contact us.
                         </p>
                     </div>
                     <div className="row">
                         <div className="col-lg-6">
-                            {/* <div className="contacts-container">
-                                <div className="contacts-logo">
-                                    <i className="far fa-envelope fa-2x"></i>
-                                </div>
-                                <div className="email">
-                                    <p>er.navdeepsingh41@gmail.com</p>
-                                    <p>parshant648@gmail.com</p>
-                                    <p>pratik888top@gmail.com</p>
-                                </div>
-                            </div>
-                            <div className="contacts-container">
-                                <div className="contacts-logo">
-                                    <i className="fab fa-instagram fa-2x"></i>
-                                </div>
-                                <div className="instagram">
-                                    <p>navdeepsaini07</p>
-                                    <p>parshant_yadav321</p>
-                                    <p>pratik_Op</p>
-                                </div> */}
-                            {/* </div> */}
                             <div className="contact-image">
                                 <ContactSvg />
                             </div>
@@ -89,16 +70,15 @@ function Contact() {
                                 <form onSubmit={submit}>
                                     <input
                                         onChange={handleChange}
-                                        value={contactData.userEmail}
+                                        defaultValue={sessionStorage.getItem("email")}
                                         className="form-control input"
                                         type="email"
                                         name="userEmail"
-                                        required
                                         placeholder="Email"
                                     />
                                     <input
                                         onChange={handleChange}
-                                        value={contactData.userName}
+                                        defaultValue={sessionStorage.getItem("name")}
                                         className="form-control input"
                                         type="text"
                                         name="userName"
@@ -113,9 +93,9 @@ function Contact() {
                                         type="text"
                                         required
                                         name="userMessage"
-                                        placeholder="Your Question or Suggestion..."
+                                        placeholder="Your Suggestions..."
                                     />
-                                    {condition ? <p style={{ color: "green" }}>Your message or suggestion is submitted.</p> : null}
+                                    {condition ? <p style={{ color: "green" }}>Thanks for your suggestions!</p> : null}
                                     <div className="contact-us-button">
                                         <button className=" btn btn-primary" type="submit">
                                             SEND MESSAGE
@@ -125,13 +105,8 @@ function Contact() {
                             </div>
                         </div>
                     </div>
-                    {/* <div className="footer">
-                        <i className="far fa-envelope fa-2x"></i>
-                        <p className="email">quick-querysupport@gmail.com</p>
-                    </div> */}
                 </div>
             </div>
-            {/* </div> */}
         </section>
     );
 }

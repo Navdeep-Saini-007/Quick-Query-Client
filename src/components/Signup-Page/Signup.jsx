@@ -2,13 +2,9 @@ import React, { useState } from "react";
 import "./Signup.css";
 import { Redirect, Link } from "react-router-dom";
 function Signup(props) {
-    const [userDetails, setUserdetails] = useState(null);
+    const [userDetails, setUserdetails] = useState("");
 
-    const [isRegistered, setIsRegistered] = useState(false);
-
-    const [isDone, setIsdone] = useState(false);
-
-    const [checkUser, setCheckuser] = useState(false);
+    const [condition, setCondition] = useState({ isRegistered: false, isDone: false, checkUser: false });
 
     const [userData, setUserData] = useState({
         email: "",
@@ -46,9 +42,14 @@ function Signup(props) {
             .then((serverResponse) => {
                 console.log(serverResponse);
                 setUserdetails(serverResponse.user);
-                setCheckuser(serverResponse.already);
-                setIsdone(serverResponse.userExisted);
-                setIsRegistered(serverResponse.userExisted);
+                setCondition((prevValue) => {
+                    return {
+                        ...prevValue,
+                        isRegistered: serverResponse.userExisted,
+                        isDone: serverResponse.userExisted,
+                        checkUser: serverResponse.already
+                    }
+                })
                 setUserData({ email: "", fullName: "", password: "" });
             });
     }
@@ -63,15 +64,6 @@ function Signup(props) {
                             <h2 className="subheading margin_fifteen">
                                 A place to learn and share knowledge.
                             </h2>
-                            {/* <button className="btn btn-primary google-button margin_fifteen">
-                                <i className="fab fa-google google-icon-signup"></i>
-                                Log in with Google
-                            </button> */}
-                            {/* <div className="margin_fifteen">
-                                <hr />
-                                <span className="OR">OR</span>
-                                <hr />
-                            </div> */}
                             <input
                                 name="email"
                                 value={userData.email}
@@ -99,15 +91,14 @@ function Signup(props) {
                                 type="password"
                                 placeholder="Password"
                             ></input>
-                            {checkUser ? <p style={{ color: "red" }}>This email address is already registered.</p> : null}
+                            {condition.checkUser ? <p style={{ color: "red" }}>This email address is already registered.</p> : null}
                             <button
-                                value={isRegistered}
                                 type="submit"
                                 className="btn btn-primary signup-button"
                             >
                                 Sign up
                             </button>
-                            {/* <p className="p-fadedcolor">
+                            <p className="p-fadedcolor">
                                 By signing up, you agree to our{" "}
                                 <a className="faded-links" href="#signup">
                                     Terms
@@ -121,7 +112,7 @@ function Signup(props) {
                                     Cookies Policy
                                 </a>
                                 .
-                            </p> */}
+                            </p>
                         </form>
                     </div>
                     <div className="account-div-signup div-border">
@@ -132,8 +123,10 @@ function Signup(props) {
                     </div>
                 </div>
             </div>
-            {isDone ? props.details(userDetails) : null}
-            {isRegistered ? <Redirect to="/home" /> : null}
+            {condition.isDone ? sessionStorage.setItem("id", userDetails._id) : null}
+            {condition.isDone ? sessionStorage.setItem("name", userDetails.userName) : null}
+            {condition.isDone ? sessionStorage.setItem("email", userDetails.email) : null}
+            {condition.isRegistered ? <Redirect to="/home" /> : null}
         </section>
     );
 }

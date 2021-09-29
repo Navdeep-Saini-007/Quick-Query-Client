@@ -3,15 +3,22 @@ import { Link } from "react-router-dom";
 import "./Forgot.css";
 function Forgot() {
 
-    const [forgotPage, setForgotpage] = useState({ email: "" });
+    const [forgotPage, setForgotpage] = useState({ email: "", password: "", storeEmail: "" });
 
-    const [newPassword, setNewpassword] = useState({ password: "" });
-
-    const [condition, setCondition] = useState(false);
-
-    const [ack, setAck] = useState(false);
+    const [condition, setCondition] = useState({ change: false, ack: false, checkEmail: true });
 
     function handleChange(event) {
+        const { name, value } = event.target;
+        setForgotpage((prevValue) => {
+            return {
+                ...prevValue,
+                [name]: value,
+                storeEmail: ""
+            }
+        })
+    }
+
+    function handlepasswordChange(event) {
         const { name, value } = event.target;
         setForgotpage((prevValue) => {
             return {
@@ -20,20 +27,6 @@ function Forgot() {
             }
         })
     }
-
-    function handlepasswordChange(event) {
-        const { name, value } = event.target;
-        setNewpassword((prevValue) => {
-            return {
-                ...prevValue,
-                [name]: value,
-            }
-        })
-    }
-
-    // if (forgotPage.password1 && forgotPage.password2 !== "" && forgotPage.password1 === forgotPage.password2) {
-    //     setPassword(true);
-    // }
 
     function submit(event) {
         event.preventDefault();
@@ -54,8 +47,14 @@ function Forgot() {
             })
             .then((serverResponse) => {
                 console.log(serverResponse);
-                setCondition(serverResponse.user);
-                setForgotpage({ email: "" });
+                setCondition((prevValue) => {
+                    return {
+                        ...prevValue,
+                        change: serverResponse.user,
+                        checkEmail: serverResponse.user
+                    }
+                })
+                setForgotpage({ email: "", password: "", storeEmail: serverResponse.serverEmail });
             });
     }
 
@@ -67,7 +66,7 @@ function Forgot() {
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify(newPassword),
+            body: JSON.stringify(forgotPage),
         })
             .then((response) => {
                 if (!response.ok) {
@@ -78,42 +77,33 @@ function Forgot() {
             })
             .then((serverResponse) => {
                 console.log(serverResponse);
-                setAck(serverResponse.done);
-                setNewpassword({ password: "" });
+                setCondition((prevValue) => {
+                    return {
+                        ...prevValue,
+                        ack: serverResponse.done
+                    }
+                })
             });
     }
 
-
     return (
         <section id="forgot-password">
-            {/* <div className="Reset-Password">
-                <img src="" alt="forgot-password" />
-                <h1>Trouble Logging In?</h1>
-                <div className="info">
-                    <p>Enter your Email Address and we'll send you <br /> a link to get back into your account.
-                    </p>
-                </div>
-                <input type="email" className="input-box" placeholder="Your Email" />
-                <button type="button" className="send-link-btn">Send Login Link</button>
-                <hr /><p className="or">OR</p>
-                <div className="info1"><p><h1>Create New Account</h1></p></div>
-                <div className="back">Back To Login</div>
-            </div> */}
             <div className="container-fluid">
                 <div className="main-wrapper">
                     <div className="forgot-page-wrapper div-border">
                         <h1>Forgot Password?</h1>
                         <h2 className="forgot-subheading">Enter your registered email address here</h2>
-                        {condition ? null :
+                        {condition.change ? null :
                             <form onSubmit={submit}>
                                 <input name="email" onChange={handleChange} value={forgotPage.email} className="form-control forgot-input" type="text" placeholder="Your Email" required />
+                                {condition.checkEmail ? null : <p style={{ color: "red" }}>This email was not registered.</p>}
                                 <button className="btn btn-primary forgot-button">Submit</button>
                             </form>}
-                        {condition ?
+                        {condition.change ?
                             <form onSubmit={passwordSubmit}>
-                                <input name="password" value={newPassword.password} onChange={handlepasswordChange} className="form-control password-input" type="password" placeholder="Enter New Password" required />
-                                {/* <input name="password2" onChange={handleChange} className="form-control password-input" type="password" placeholder="Confirm Password" required /> */}
-                                {ack ? <p style={{ color: "green" }}>Your password was changed. Please login.</p> : null}
+                                <input defaultValue={forgotPage.storeEmail} className="form-control password-input" type="text" />
+                                <input name="password" value={forgotPage.password} onChange={handlepasswordChange} className="form-control password-input" type="password" placeholder="Enter New Password" required />
+                                {condition.ack ? <p style={{ color: "green" }}>Your password was changed. Please login.</p> : null}
                                 <button className="btn btn-primary forgot-button">Submit</button>
                             </form> : null}
                         <div className="forgot-or-div">

@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./Profile.css";
-import Pquestions from "./Pquestions";
-import PreviousPosts from "../Post/PreviousPosts";
+import ProfileQuestions from "./ProfileQuestions";
+import ProfilePosts from "./ProfilePosts";
 
 function Profile(props) {
 
-    const [completeInfo, setCompleteinfo] = useState({ questions: null, answers: null, posts: null });
+    const [completeInfo, setCompleteinfo] = useState({ questions: 0, answers: 0, posts: 0 });
 
     const [questionField, setQuestionfield] = useState([]);
 
@@ -16,7 +16,7 @@ function Profile(props) {
 
     const [profilePage, setProfilepage] = useState({ profileOption: true, questionOption: false, answerOption: false, postOption: false });
 
-    let currentUser = props.user.userName;
+    let currentUser = sessionStorage.getItem("name");
 
     useEffect(() => {
         fetch("http://localhost:2900/completeInfo", {
@@ -149,72 +149,7 @@ function Profile(props) {
             })
     }
 
-    console.log(questionField);
-    console.log(answerField);
-    console.log(postField);
-
     return (
-        // <section className="bg-light">
-        //     <div className="container-fluid">
-        //         <div className="col-lg-6 col-md-6  offset-lg-3 offset-md-3 bg-white shadow my-5 border border-primary">
-        //             <div className="editProfileForm">
-        //                 <div className="icon">
-        //                     <i className="fas fa-user-circle fa-5x"></i><br />
-        //                 </div>
-        //                 <h2 className="h2 text-center text-dark ">Profile</h2>
-        //                 <div className="form-group">
-        //                     <label for="userFName"> First Name<span className="text-danger ml-1">*</span></label>
-        //                     <input type="text" className="form-control" id="userFName" placeholder="First Name" />
-        //                 </div>
-        //                 <div className="form-group">
-        //                     <label for="userLname">Last Name<span className="text-danger ml-1">*</span></label>
-        //                     <input type="text" className="form-control" id="userLname" placeholder="Last Name" />
-        //                 </div>
-        //                 <div className="form-group">
-        //                     <label for="userId">Email id<span className="text-danger ml-1">*</span></label>
-        //                     <input type="text" className="form-control" placeholder="Email id" />
-        //                 </div>
-        //                 <div className="form-group">
-        //                     <label for="userCourse">Course<span className="text-danger ml-1">*</span></label><br />
-        //                     <select className="form-select" aria-label="Default select example">
-        //                         <option selected>Course</option>
-        //                         <option value="1">Btech</option>
-        //                         <option value="2">BBA</option>
-        //                         <option value="3">MBA</option>
-        //                         <option value="4">BCA</option>
-        //                     </select>
-        //                 </div>
-        //                 <div className="form-group">
-        //                     <label for="userBatch">Batch<span className="text-danger ml-1">*</span></label><br />
-        //                     <select className="form-select1" aria-label="Default select example">
-        //                         <option selected>From</option>
-        //                         <option value="1">2017</option>
-        //                         <option value="2">2018</option>
-        //                         <option value="3">2019</option>
-        //                         <option value="4">2020</option>
-        //                         <option value="5">2021</option>
-        //                     </select>
-        //                     <select className="form-select2" aria-label="Default select example">
-        //                         <option selected>To</option>
-        //                         <option value="1">2021</option>
-        //                         <option value="2">2022</option>
-        //                         <option value="3">2023</option>
-        //                         <option value="4">2024</option>
-        //                         <option value="5">2025</option>
-        //                     </select>
-        //                 </div>
-        //                 <div className="form-group">
-        //                     <label for="userBio">Biography<span className="text-danger ml-1">*</span></label>
-        //                     <textarea className="form-control" id="userBio" rows="4"></textarea>
-        //                 </div>
-        //                 <div className="button">
-        //                     <button type="button" className="btn btn-outline-primary btn-block text-uppercase ">Save</button>
-        //                     <button type="button" className="btn btn-outline-secondary btn-block text-uppercase">Cancel</button>
-        //                 </div>
-        //             </div>
-        //         </div>
-        //     </div>
-        // </section>
         <section id="Profile">
             <div className="container-fluid">
                 <div className="profile-page-wrapper">
@@ -228,8 +163,8 @@ function Profile(props) {
                         </div>
                         <div className="col-lg-6 col-md-6 user-info-div">
                             <div className="email-and-editProfile">
-                                <h1>{props.user.userName}</h1>
-                                <Link to="/"><h2 className="edit-profile">Edit Profile</h2></Link>
+                                <h1>{sessionStorage.getItem("name")}</h1>
+                                <Link to="/editProfile"><h2 className="edit-profile">Edit Profile</h2></Link>
                             </div>
                             <div className="core-info">
                                 <h5>{completeInfo.questions} Questions</h5>
@@ -237,54 +172,53 @@ function Profile(props) {
                                 <h5>{completeInfo.posts} Posts</h5>
                             </div>
                             <div>
-                                <h5>{props.user.email}</h5>
+                                <h5>{sessionStorage.getItem("email")}</h5>
                             </div>
                         </div>
                     </div>
-
                     <div className="bottom-container">
-                        <hr />
+                        <hr className="profilePage" />
                         <div className="options-div">
-                            <button className="button-style"
+                            <button className="button-style-profile"
                                 style={profilePage.profileOption ? {
                                     color: "#007bff",
                                     borderBottom: "2px solid #007bff"
                                 } : null}
                                 onClick={defaultFunction}>Profile</button>
-                            <button className="button-style"
+                            <button className="button-style-profile"
                                 style={profilePage.questionOption ? {
                                     color: "#007bff",
                                     borderBottom: "2px solid #007bff"
                                 } : null}
                                 onClick={questionInfo}>Questions</button>
-                            <button className="button-style"
+                            <button className="button-style-profile"
                                 style={profilePage.answerOption ? {
                                     color: "#007bff",
                                     borderBottom: "2px solid #007bff"
                                 } : null}
                                 onClick={answerInfo}>Answers</button>
-                            <button className="button-style"
+                            <button className="button-style-profile"
                                 style={profilePage.postOption ? {
                                     color: "#007bff",
                                     borderBottom: "2px solid #007bff"
                                 } : null}
                                 onClick={postInfo}>Posts</button>
                         </div>
-                        <hr />
+                        <hr className="profilePage" />
                         <div>
-                            {profilePage.profileOption ? <h4>Your Profile</h4> : null}
+                            {profilePage.profileOption ? <h4 className="your-profile">Your Profile</h4> : null}
                         </div>
                         <div>
                             {profilePage.questionOption ? <>{
                                 questionField.map((questionField, index) => (
-                                    <Pquestions
+                                    <ProfileQuestions
                                         key={index}
                                         id={questionField._id}
                                         userName={questionField.userName}
                                         question={questionField.questions}
                                         answer={questionField.answers}
-                                        user={props.user}
                                         timeAsked={questionField.timeAsked}
+                                        branch={questionField.branch}
                                     />
 
                                 ))
@@ -293,14 +227,14 @@ function Profile(props) {
                         <div>
                             {profilePage.answerOption ? <>{
                                 answerField.map((answerField, index) => (
-                                    <Pquestions
+                                    <ProfileQuestions
                                         key={index}
                                         id={answerField._id}
                                         userName={answerField.userName}
                                         question={answerField.questions}
                                         answer={answerField.answers}
-                                        user={props.user}
                                         timeAsked={answerField.timeAsked}
+                                        branch={answerField.branch}
                                     />
 
                                 ))
@@ -308,12 +242,14 @@ function Profile(props) {
                         </div>
                         <div>
                             {profilePage.postOption ? <>{postField.map((postField, index) => (
-                                <PreviousPosts
+                                <ProfilePosts
                                     key={index}
                                     id={postField._id}
                                     post={postField.post}
                                     userName={postField.user}
                                     timePosted={postField.timePosted}
+                                    likes={postField.upVotes}
+                                    dislikes={postField.downVotes}
                                 />
                             ))}</> : null}
                         </div>

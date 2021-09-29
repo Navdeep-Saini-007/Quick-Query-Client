@@ -1,9 +1,5 @@
 #signup{
     text-align: center;
-    /* display:-ms-flexbox; */
-    display: flex;
-    /* -ms-flex-align: center; */
-    justify-content: center;
 }
 
 #signup .container-fluid{
@@ -27,15 +23,10 @@
     font-size: 3rem;
 }
 
-/* .form-signup{
-    padding: 1rem 2.5rem;
-} */
-
 #signup .subheading{
     color:#8E8E8E;
     font-size: 1.2rem;
     font-weight: 600;
-    /* line-height: 1.2rem; */
 } 
 
 .google-button{
@@ -54,10 +45,6 @@
 .margin_ten{
     margin:0 auto 10px;
 }
-/* 
-.line-signup{
-    width:105px;
-} */
 
 hr{
     display: inline-block;

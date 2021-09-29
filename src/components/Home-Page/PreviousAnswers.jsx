@@ -1,182 +1,176 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 import ThumbDownIcon from '@material-ui/icons/ThumbDown';
-// import CommentIcon from '@material-ui/icons/Comment';
 function PreviousAnswers(props) {
-  // const [previousAnswerspage, setPreviousAnswerspage] = useState({
-  //   upvoteHook: props.likes,
-  //   downvoteHook: props.dislikes,
-  //   answerId: null,
-  // });
 
-  // const [upCount, setUpcount] = useState(0);
+  const [answerPage, setAnswerpage] = useState({ answerId: null, upVotes: props.likes, downVotes: props.dislikes });
 
-  // const [downCount, setDowncount] = useState(0);
+  const [count, setCount] = useState({ upCount: 0, downCount: 0 });
 
-  // let i = 0;
-  // let j = 0;
+  const [already, setAlready] = useState({ likes: false, dislikes: false });
 
-  // function upVote() {
-  //   setPreviousAnswerspage((prevValue) => {
-  //     if (previousAnswerspage.downvoteHook === 0) {
-  //       return {
-  //         ...prevValue,
-  //         upvoteHook: i + 1,
-  //         answerId: props.id,
-  //       };
-  //     } else {
-  //       return {
-  //         ...prevValue,
-  //         upvoteHook: i + 1,
-  //         downvoteHook: 0,
-  //         answerId: props.id,
-  //       };
-  //     }
-  //   });
-  // }
+  function handleLikes() {
+    setCount((prevValue) => {
+      return {
+        ...prevValue,
+        upCount: count.upCount + 1
+      }
+    })
+    if (already.dislikes && count.upCount % 2 === 0) {
+      setAlready((prevValue) => {
+        return {
+          ...prevValue,
+          dislikes: false
+        }
+      });
+      setCount((prevValue) => {
+        return {
+          ...prevValue,
+          upCount: 1,
+          downCount: 0
+        }
+      })
+      setAnswerpage((prevValue) => {
+        return {
+          ...prevValue,
+          upVotes: answerPage.upVotes + 1,
+          downVotes: answerPage.downVotes - 1,
+          answerId: props.id
+        }
+      })
 
-  // function downVote() {
-  //   setPreviousAnswerspage((prevValue) => {
-  //     if (previousAnswerspage.upvoteHook === 0) {
-  //       return {
-  //         ...prevValue,
-  //         downvoteHook: j + 1,
-  //         answerId: props.id,
-  //       };
-  //     } else {
-  //       return {
-  //         ...prevValue,
-  //         upvoteHook: 0,
-  //         downvoteHook: j + 1,
-  //         answerId: props.id,
-  //       };
-  //     }
-  //   });
-  // }
-  // function upVote() {
-  //   setUpcount(upCount + 1);
-  //   console.log(upCount);
-  //   if (upCount % 2 === 0) {
-  //     setPreviousAnswerspage((prevValue) => {
-  //       return {
-  //         ...prevValue,
-  //         upvoteHook: previousAnswerspage.upvoteHook + 1,
-  //       };
-  //     });
-  //   } else {
-  //     setPreviousAnswerspage((prevValue) => {
-  //       return {
-  //         ...prevValue,
-  //         upvoteHook: previousAnswerspage.upvoteHook - 1,
-  //       };
-  //     });
-  //   }
-  // }
+    } else if (count.upCount % 2 === 0) {
+      setAlready((prevValue) => {
+        return {
+          ...prevValue,
+          likes: true
+        }
+      });
+      setAnswerpage((prevValue) => {
+        return {
+          ...prevValue,
+          upVotes: answerPage.upVotes + 1,
+          answerId: props.id
+        }
+      })
 
-  // function downVote() {
-  //   setDowncount(downCount + 1);
-  //   console.log(downCount);
-  //   if (downCount % 2 === 0 && upCount !== 0 && upCount % 2 === 0) {
-  //     setPreviousAnswerspage((prevValue) => {
-  //       return {
-  //         ...prevValue,
-  //         upvoteHook: previousAnswerspage.upvoteHook - 1,
-  //         downvoteHook: previousAnswerspage.downvoteHook + 1,
-  //       };
-  //     });
-  //   } else if (downCount % 2 === 0) {
-  //     setPreviousAnswerspage((prevValue) => {
-  //       return {
-  //         ...prevValue,
-  //         downvoteHook: previousAnswerspage.downvoteHook + 1,
-  //       };
-  //     });
-  //   } else {
-  //     setPreviousAnswerspage((prevValue) => {
-  //       return {
-  //         ...prevValue,
-  //         downvoteHook: previousAnswerspage.downvoteHook - 1,
-  //       };
-  //     });
-  //   }
-  // }
+    } else {
+      setAlready((prevValue) => {
+        return {
+          ...prevValue,
+          likes: false
+        }
+      });
+      setAnswerpage((prevValue) => {
+        return {
+          ...prevValue,
+          upVotes: answerPage.upVotes - 1,
+          answerId: props.id
+        }
+      })
+    }
+  }
 
-  // function submit(e) {
-  //   console.log(previousAnswerspage);
-  //   fetch("http://localhost:2900/answers", {
-  //     method: "PATCH",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify(previousAnswerspage),
-  //   })
-  //     .then((response) => {
-  //       if (!response.ok) {
-  //         console.log("error");
-  //       }
-  //       return response.json();
-  //     })
-  //     .then((serverResponse) => {
-  //       console.log(serverResponse);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // }
+  function handleDislikes() {
+    setCount((prevValue) => {
+      return {
+        ...prevValue,
+        downCount: count.downCount + 1
+      }
+    })
+    if (already.likes && count.downCount % 2 === 0) {
+      setAlready((prevValue) => {
+        return {
+          ...prevValue,
+          likes: false
+        }
+      })
+      setCount((prevValue) => {
+        return {
+          ...prevValue,
+          upCount: 0,
+          downCount: 1
+        }
+      })
+      setAnswerpage((prevValue) => {
+        return {
+          ...prevValue,
+          downVotes: answerPage.downVotes + 1,
+          upVotes: answerPage.upVotes - 1,
+          answerId: props.id
+        }
+      })
+    } else if (count.downCount % 2 === 0) {
+      setAlready((prevValue) => {
+        return {
+          ...prevValue,
+          dislikes: true
+        }
+      })
+      setAnswerpage((prevValue) => {
+        return {
+          ...prevValue,
+          downVotes: answerPage.downVotes + 1,
+          answerId: props.id
+        }
+      })
+    } else {
+      setAlready((prevValue) => {
+        return {
+          ...prevValue,
+          dislikes: false
+        }
+      })
+      setAnswerpage((prevValue) => {
+        return {
+          ...prevValue,
+          downVotes: answerPage.downVotes - 1,
+          answerId: props.id
+        }
+      })
+    }
+  }
+
+  useEffect(() => {
+    console.log(answerPage);
+    fetch("http://localhost:2900/answers", {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(answerPage),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          console.log("error");
+        }
+        return response.json();
+      })
+      .then((serverResponse) => {
+        console.log(serverResponse);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [answerPage, answerPage.answerId, answerPage.upVotes, answerPage.downVotes]);
 
   return (
-    <div className="answer">
+    <div id="answer">
       <hr />
-      <br />
-      <h4 className="final-answer">{props.answer}</h4>
-      {/* {previousAnswerspage.upvoteHook}
-      <button
-        name="upvoteHook"
-        value={previousAnswerspage.upvoteHook}
-        onClick={upVote}
-      >
-        +
-      </button>
-      {previousAnswerspage.downvoteHook}
-      <button
-        name="downvoteHook"
-        value={previousAnswerspage.downvoteHook}
-        onClick={downVote}
-      >
-        -
-      </button> */}
+      <h4>{props.answer}</h4>
       <div className="details">
         <div className="ui-icons-questions">
-          <button className="button-style like-question-1" style={{ color: "#8E8E8E" }}>
-            <ThumbUpIcon />
+          <button className="button-style button-color" style={already.likes ? { color: "#007bff" } : null} onClick={handleLikes}>
+            <ThumbUpIcon />  {answerPage.upVotes}
           </button>
-          <button className="button-style" style={{ color: "#8E8E8E" }}>
-            <ThumbDownIcon />
+          <button className="button-style button-color" style={already.dislikes ? { color: "#007bff" } : null} onClick={handleDislikes}>
+            <ThumbDownIcon /> {answerPage.downVotes}
           </button>
-          {/* <CommentIcon /> */}
         </div>
         <div>
           Answered by {props.userAnswered} on {props.timeAnswered}
         </div>
       </div>
-      {/* <form onSubmit={submit}>
-        <button
-          value={previousAnswerspage.upvoteHook}
-          name="upvoteHook"
-          onClick={upVote()}
-        >
-          +
-        </button>
-        {props.likes}
-        <button
-          value={previousAnswerspage.downvoteHook}
-          name="downvoteHook"
-          onClick={downVote()}
-        >
-          -
-        </button>
-        {props.dislikes}
-      </form> */}
     </div>
   );
 }

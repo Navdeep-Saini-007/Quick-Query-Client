@@ -1,24 +1,6 @@
-import React from "react";
-import "./Navbar.css";
 import { Link } from "react-router-dom";
-// import Signup from "./Signup.jsx"
-function Navbar() {
-    // function Logout() {
-    //     fetch("http://localhost:3000/logout")
-    //         .then((response) => {
-    //             if (!response.ok) {
-    //                 console.log("error");
-    //             }
-    //             return response.json();
-    //         })
-    //         .then((result) => {
-    //             console.log(result);
-    //         })
-    //         .catch((err) => {
-    //             console.log(err);
-    //         });
-    // }
-
+import "./Navbar.css";
+function Navbar(props) {
     return (
         <nav className="navbar navbar-custom navbar-expand-lg navbar-dark">
             <Link to="/home" className="navbar-brand">
@@ -75,16 +57,10 @@ function Navbar() {
                             <Link className="dropdown-item" to="/profile">
                                 Profile
                             </Link>
-                            {/* <Link className="dropdown-item" to="/feedback">
-                                Feedback
-                            </Link> */}
                             <div className="dropdown-divider"></div>
                             <Link className="dropdown-item" to="/">
                                 Log Out
                             </Link>
-                            {/* <button onClick={Logout} className="logout">
-                                Log Out
-                            </button> */}
                         </div>
                     </li>
                 </ul>

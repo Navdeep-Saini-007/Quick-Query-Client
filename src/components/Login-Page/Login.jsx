@@ -4,20 +4,14 @@ import { Link, Redirect } from "react-router-dom";
 import LoginSvg from "./LoginSvg.jsx";
 
 function Login(props) {
-    const [userDetails, setUserdetails] = useState(null);
-
-    const [isRegistered, setIsRegistered] = useState(false);
-
-    const [isDone, setIsdone] = useState(false);
+    const [userDetails, setUserdetails] = useState("");
 
     const [loginData, setLoginData] = useState({
         email: "",
         password: "",
     });
 
-    const [checkPassword, setCheckpassword] = useState(true);
-
-    // const [checkUser, setCheckuser] = useState(true);
+    const [condition, setCondition] = useState({ checkUser: false, checkPassword: true, isDone: false, isRegistered: false });
 
     function handleChange(event) {
         const { name, value } = event.target;
@@ -49,32 +43,20 @@ function Login(props) {
             .then((result) => {
                 console.log(result);
                 setUserdetails(result.user);
-                setCheckpassword(result.userExisted);
-                // setCheckuser(result.notUSer);
-                setIsdone(result.userExisted);
-                setIsRegistered(result.userExisted);
+                setCondition((prevValue) => {
+                    return {
+                        ...prevValue,
+                        checkPassword: result.wrongPass,
+                        checkUser: result.notUser,
+                        isRegistered: result.userExisted,
+                        isDone: result.userExisted
+                    }
+                })
             })
             .catch((err) => {
                 console.log(err);
             });
     }
-
-    // function google() {
-    //   fetch("http://localhost:2900/auth/google")
-    //     .then((response) => {
-    //       if (!response.ok) {
-    //         console.log("error");
-    //         console.log(response);
-    //       }
-    //       return response.json();
-    //     })
-    //     .then((result) => {
-    //       console.log(result);
-    //     })
-    //     .catch((err) => {
-    //       console.log(err);
-    //     });
-    // }
 
     return (
         <section id="login">
@@ -116,35 +98,20 @@ function Login(props) {
                                         autoCapitalize="off"
                                     />
                                     <br />
-                                    {checkPassword ? null : <p style={{ color: "red" }}>Your password is incorrect. Please check it again.</p>}
-                                    {/* {checkUser ? null : <p style={{ color: "red" }}>You are not registered. Please create a account.</p>} */}
+                                    {condition.checkPassword ? null : <p style={{ color: "red" }}>Your password is incorrect. Please check it again.</p>}
+                                    {condition.checkUser ? <p style={{ color: "red" }}>You are not registered. Please create a account.</p> : null}
                                     <button
                                         type="submit"
                                         className="btn btn-primary login-button button-margin"
                                     >
                                         Log in
                                     </button>
-
-                                    {/* <div className="OR-div margin-twenty">
-                                        <hr />
-                                        <span className="OR">OR</span>
-                                        <hr />
-                                    </div> */}
                                     <div>
                                         <Link to="/forgotpassword" className="hover">
                                             <span className="forgot-password">Forgot password?</span>
                                         </Link>
                                     </div>
                                 </form>
-                                {/* <div className="margin-twenty">
-                  <button
-                    type="submit"
-                    onClick={google}
-                    className="btn btn-primary"
-                  >
-                    <i className="fab fa-google margin-five"></i>Log in With Google
-                  </button>
-                </div> */}
                             </div>
                             <div className="second-div-border div-border account-div-login">
                                 <span className="margin-five">Don't have an account.</span>
@@ -156,8 +123,10 @@ function Login(props) {
                     </div>
                 </div>
             </div>
-            {isDone ? props.details(userDetails) : null}
-            {isRegistered ? <Redirect to="/home" /> : null}
+            {condition.isDone ? sessionStorage.setItem("id", userDetails._id) : null}
+            {condition.isDone ? sessionStorage.setItem("name", userDetails.userName) : null}
+            {condition.isDone ? sessionStorage.setItem("email", userDetails.email) : null}
+            {condition.isRegistered ? <Redirect to="/home" /> : null}
         </section>
     );
 }

@@ -1,0 +1,58 @@
+#edit-profile .container-fluid{
+    padding:5% 13%;
+}
+
+.editProfile-wrapper{
+    max-width: 35rem;
+    margin: 0 auto;
+}
+
+.form-components{
+    display: flex;
+    flex-direction: column;
+    padding:1rem;
+}
+
+.picture-div{
+    display: flex;
+    margin:auto;
+    margin-bottom: 2rem;
+}
+
+.edit-img{
+    width: 7rem;
+    height: 7rem;
+}
+
+.pictureRight-div{
+    padding-left: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.split{
+    display: flex;
+}
+
+.spacing{
+    margin-bottom:1rem;
+}
+
+.user-option{
+    padding:0.5rem;
+    width:5rem;
+}
+
+.dropdown-input{
+    border:1px solid #ced4da;
+}
+
+.left-dropdown{
+    margin-right: 1rem;
+}
+
+.edit-profile-btn{
+    width:max-content;
+    margin: 0 auto;
+}

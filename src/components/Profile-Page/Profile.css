@@ -1,89 +1,32 @@
-/* *
-{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-.icon
-{
-    text-align: center;
-    padding-top: 10px;
-}
-.button
-{
-    display:block;
-    width: 100px;
-    padding-bottom: 10px;
-    margin: auto;
-}
-.editProfileForm .h2
-{
-    padding-top: 20px;
-}
-.form-group .form-select
-{
-    width: 100%;
-    border: 1px solid #ced4da;
-    border-radius: .25rem;
-    line-height: 1.5;
-    height: 40px;
-}
-.form-group .form-select1
-{
-    width:49%;
-    color: #495057;
-    border: 1px solid #ced4da;
-    border-radius: .25rem;
-    line-height: 1.5;
-    height: 40px;
-}
-.form-group .form-select2
-{
-    width: 49%;
-    color: #495057;
-    border: 1px solid #ced4da;
-    border-radius: .25rem;
-    line-height: 1.5;
-    height: 40px;
-}
-
- */
-
  #Profile .container-fluid{
      padding:4% 13%;
-     
  }
 
  #Profile h1,h2{
-     margin-bottom: 0;
-     font-weight:normal;
- }
+    margin-bottom: 0;
+    font-weight:normal;
+}
 
- #Profile h5{
-     margin:0 4rem 0 0;
-     font-weight: lighter;
- }
-
- #Profile hr{
-     width: 100%;
-     margin-top:0;
- }
+#Profile h5{
+    margin:0 4rem 0 0;
+    font-weight: lighter;
+}
 
  .profile-page-wrapper{
-     padding:1rem;
- }
+    padding:1rem;
+}
 
- .top-div{
-     margin-bottom: 3rem;
- }
+.top-div{
+    margin-bottom: 3rem;
+}
 
- .profile-img-div{
-     display: flex;
-     justify-content: center;   
-     max-width:25rem;
- }
+.profile-img-div{
+    display: flex;
+    justify-content: center;   
+    max-width:25rem;
+}
 
- .profile-page-img{
+.profile-page-img{
     max-width: 12rem;
     max-height: 12rem;
 }
@@ -107,10 +50,31 @@
     display: flex;
 }
 
- .options-div{
-     display: flex;
-     justify-content: space-between;
+.bottom-container{
+    padding:0 5.5rem;
+}
+
+#Profile .profilePage{
+    width: 100%;
+    margin:0 0 1rem;
+    border-top-width: 2px;
  }
+
+ .your-profile{
+    margin:0;
+    font-weight: lighter;
+ }
+
+.options-div{
+    display: flex;
+    justify-content: space-between;
+}
+
+.button-style-profile{
+    border:none;
+    text-align:left ;
+    padding: 0.5rem 0.5rem 1rem 0.5rem;
+}
 
 .button-style{
     border:none;
@@ -119,10 +83,8 @@
     padding: 0.5rem 0.5rem 1rem 0.5rem;
 }
 
-.button-style hr{
-    margin: 0.1rem 0 0;
-}
-
-.bottom-container{
-    padding:0 5.5rem;
+.ui-icons-profile{
+    display: flex;
+    justify-content: space-between;
+    width: 14%;
 }

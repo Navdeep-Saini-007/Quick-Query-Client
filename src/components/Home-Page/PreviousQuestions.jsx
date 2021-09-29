@@ -9,9 +9,36 @@ function PreviousQuestions(props) {
         userAnswered: "",
     });
 
-    // const [answer, setAnswer] = useState(false);
+    const [inputAnimation, setInputanimation] = useState({
+        count: 0,
+        condition: false
+    });
 
     const [isSubmitted, setIssubmitted] = useState(false);
+
+    function handleAnimation(event) {
+        setInputanimation((prevValue) => {
+            return {
+                ...prevValue,
+                count: inputAnimation.count + 1
+            }
+        })
+        if (inputAnimation.count % 2 === 0) {
+            setInputanimation((prevValue) => {
+                return {
+                    ...prevValue,
+                    condition: true
+                }
+            })
+        } else {
+            setInputanimation((prevValue) => {
+                return {
+                    ...prevValue,
+                    condition: false
+                }
+            })
+        }
+    }
 
     function handleChange(event) {
         const { name, value } = event.target;
@@ -20,7 +47,7 @@ function PreviousQuestions(props) {
                 ...prevValue,
                 [name]: value,
                 serverQuestionid: props.id,
-                userAnswered: props.user.userName,
+                userAnswered: sessionStorage.getItem("name")
             };
         });
     }
@@ -55,26 +82,36 @@ function PreviousQuestions(props) {
 
     return (
         <div className="previous-questions">
-            {/* <div className="user-details"> */}
-            {/* <img
-                    className="user-profile"
-                    src="images/Sign-up-logo.png"
-                    alt="profile-in-div"
-                /> */}
-            {/* <div className="user-name"><span style={{ borderBottom: "1px solid #8E8E8E" }}>{props.userName} asked on {props.timeAsked}</span></div> */}
-            {/* </div> */}
             <div>
                 <h4>{props.question}</h4>
-                {/* <div><CreateIcon /></div> */}
-                {/* <div className="details">Asked by {props.userName} on {props.timeAsked}</div> */}
                 <div className="details">
-                    <button className="button-style" style={{ color: "#8E8E8E" }} >
-                        <CreateIcon />  Answer Now
-                    </button>
+                    <div className="question-description">
+                        <button className="button-style" style={{ color: "#8E8E8E" }} onClick={handleAnimation} >
+                            <CreateIcon />  Answer Now
+                        </button>
+                        <div className="category">
+                            Category : {props.branch}
+                        </div>
+                    </div>
                     <div>
                         Asked by {props.userName} on {props.timeAsked}
                     </div>
                 </div>
+                {inputAnimation.condition ?
+                    <form className="answer-input" onSubmit={submit}>
+                        <div className="enter-question">
+                            <textarea
+                                onChange={handleChange}
+                                name="answers"
+                                value={previousquestionsPage.answers}
+                                className="question-input"
+                                type="text"
+                                placeholder="answer here..."
+                            />
+                            <button className="btn question-button btn-outline-primary">Submit</button>
+                        </div>
+                    </form>
+                    : null}
                 <div>
                     {props.answer.map((answer, index) => (
                         <PreviousAnswers
@@ -88,19 +125,6 @@ function PreviousQuestions(props) {
                         />
                     ))}
                 </div>
-                <form className="answer-input" onSubmit={submit}>
-                    <div className="enter-question">
-                        <textarea
-                            onChange={handleChange}
-                            name="answers"
-                            value={previousquestionsPage.answers}
-                            className="question-input"
-                            type="text"
-                            placeholder="answer here..."
-                        />
-                        <button className="btn question-button btn-outline-primary">Submit</button>
-                    </div>
-                </form>
             </div>
         </div>
     );

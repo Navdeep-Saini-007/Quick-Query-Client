@@ -7,15 +7,11 @@ function Home(props) {
 
     const [serverData, setServerdata] = useState([]);
 
+    const [branch, setBranch] = useState("");
+
     const [questionSubmitted, setQuestionsubmitted] = useState(false);
 
-    const [branchOptions, setBranchoptions] = useState({ all: true, cse: false, me: false, ece: false, ele: false, bca: false, mca: false, bba: false, mba: false });
-
-    // console.log(props.user);
-
-    function popUp() {
-        console.log("I got clicked.");
-    }
+    const [branchOptions, setBranchoptions] = useState({ all: true, general: false, cse: false, me: false, ece: false, ele: false, bca: false, mca: false, bba: false, mba: false });
 
     function checkSubmitted(isSubmitted) {
         setQuestionsubmitted(true);
@@ -27,8 +23,8 @@ function Home(props) {
             return {
                 ...prevValue,
                 [name]: value,
-                user: props.user.userName,
-                userId: props.user._id,
+                user: sessionStorage.getItem("name"),
+                userId: sessionStorage.getItem("id")
             };
         });
     }
@@ -60,7 +56,13 @@ function Home(props) {
     }
 
     useEffect(() => {
-        fetch("http://localhost:2900/home")
+        fetch("http://localhost:2900/homeOptions", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ branch: branch }),
+        })
             .then((response) => {
                 if (!response.ok) {
                     console.log("error");
@@ -72,13 +74,14 @@ function Home(props) {
                 setQuestionsubmitted(false);
                 console.log(data);
             });
-    }, [questionSubmitted]);
+    }, [questionSubmitted, branch]);
 
     function defaultFunction() {
         setBranchoptions((prevValue) => {
             return {
                 ...prevValue,
                 all: true,
+                general: false,
                 cse: false,
                 me: false,
                 ece: false,
@@ -89,24 +92,34 @@ function Home(props) {
                 mba: false
             }
         })
-        // fetch("http://localhost:2900/home")
-        //     .then((response) => {
-        //         if (!response.ok) {
-        //             console.log("error");
-        //         }
-        //         return response.json();
-        //     })
-        //     .then((data) => {
-        //         setServerdata(data.process);
-        //         setQuestionsubmitted(false);
-        //         console.log(data);
-        //     });
+        setBranch("");
+        setQuestionsubmitted(true);
+    }
+    function General() {
+        setBranchoptions((prevValue) => {
+            return {
+                ...prevValue,
+                all: false,
+                general: true,
+                cse: false,
+                me: false,
+                ece: false,
+                ele: false,
+                bca: false,
+                mca: false,
+                bba: false,
+                mba: false
+            }
+        })
+        setBranch("General");
+        setQuestionsubmitted(true);
     }
     function CSE() {
         setBranchoptions((prevValue) => {
             return {
                 ...prevValue,
                 all: false,
+                general: false,
                 cse: true,
                 me: false,
                 ece: false,
@@ -117,31 +130,15 @@ function Home(props) {
                 mba: false
             }
         })
-        // fetch("http://localhost:2900/homeOptions", {
-        //     method: "POST",
-        //     headers: {
-        //         "Content-Type": "application/json",
-        //     },
-        //     body: JSON.stringify({ branch: "CSE/IT" }),
-        // })
-        //     .then((response) => {
-        //         if (!response.ok) {
-        //             console.log("error");
-        //         }
-        //         return response.json();
-        //     })
-        //     .then((result) => {
-        //         console.log(result);
-        //     })
-        //     .catch((err) => {
-        //         console.log(err);
-        //     });
+        setBranch("CSE/IT");
+        setQuestionsubmitted(true);
     }
     function ME() {
         setBranchoptions((prevValue) => {
             return {
                 ...prevValue,
                 all: false,
+                general: false,
                 cse: false,
                 me: true,
                 ece: false,
@@ -152,12 +149,15 @@ function Home(props) {
                 mba: false
             }
         })
+        setBranch("ME");
+        setQuestionsubmitted(true);
     }
     function ECE() {
         setBranchoptions((prevValue) => {
             return {
                 ...prevValue,
                 all: false,
+                general: false,
                 cse: false,
                 me: false,
                 ece: true,
@@ -168,12 +168,15 @@ function Home(props) {
                 mba: false
             }
         })
+        setBranch("ECE");
+        setQuestionsubmitted(true);
     }
     function ELE() {
         setBranchoptions((prevValue) => {
             return {
                 ...prevValue,
                 all: false,
+                general: false,
                 cse: false,
                 me: false,
                 ece: false,
@@ -184,12 +187,15 @@ function Home(props) {
                 mba: false
             }
         })
+        setBranch("ELE");
+        setQuestionsubmitted(true);
     }
     function BCA() {
         setBranchoptions((prevValue) => {
             return {
                 ...prevValue,
                 all: false,
+                general: false,
                 cse: false,
                 me: false,
                 ece: false,
@@ -200,12 +206,15 @@ function Home(props) {
                 mba: false
             }
         })
+        setBranch("BCA");
+        setQuestionsubmitted(true);
     }
     function MCA() {
         setBranchoptions((prevValue) => {
             return {
                 ...prevValue,
                 all: false,
+                general: false,
                 cse: false,
                 me: false,
                 ece: false,
@@ -216,12 +225,15 @@ function Home(props) {
                 mba: false
             }
         })
+        setBranch("MCA");
+        setQuestionsubmitted(true);
     }
     function BBA() {
         setBranchoptions((prevValue) => {
             return {
                 ...prevValue,
                 all: false,
+                general: false,
                 cse: false,
                 me: false,
                 ece: false,
@@ -232,12 +244,15 @@ function Home(props) {
                 mba: false
             }
         })
+        setBranch("BBA");
+        setQuestionsubmitted(true);
     }
     function MBA() {
         setBranchoptions((prevValue) => {
             return {
                 ...prevValue,
                 all: false,
+                general: false,
                 cse: false,
                 me: false,
                 ece: false,
@@ -248,6 +263,8 @@ function Home(props) {
                 mba: true
             }
         })
+        setBranch("MBA");
+        setQuestionsubmitted(true);
     }
 
     return (
@@ -255,8 +272,7 @@ function Home(props) {
             <div className="container-fluid">
                 <div className="home-page-wrapper">
                     <div style={{ textAlign: "center" }}>
-                        <h1 style={{ marginBottom: "1rem" }}>Question/Answer Section</h1>
-                        <p style={{ marginBottom: "2rem", fontSize: "1.5rem", color: "#8E8E8E" }}>Select your branch for better results.</p>
+                        <p style={{ marginBottom: "2rem", fontSize: "1.5rem", color: "#8E8E8E" }}>Select your branch for getting specific branch questions.</p>
                     </div>
                     <div>
                         <div className="branch">
@@ -267,6 +283,13 @@ function Home(props) {
                                     borderBottom: "2px solid #007bff"
                                 } : null}
                             >All</button>
+                            <button className="branch-button"
+                                onClick={General}
+                                style={branchOptions.general ? {
+                                    color: "#007bff",
+                                    borderBottom: "2px solid #007bff"
+                                } : null}
+                            >General</button>
                             <button className="branch-button"
                                 onClick={CSE}
                                 style={branchOptions.cse ? {
@@ -324,7 +347,7 @@ function Home(props) {
                                 } : null}
                             >MBA</button>
                         </div>
-                        <hr />
+                        <hr className="branch-options-line" />
                     </div>
                     <div className="user-space">
                         <div className="user-details">
@@ -333,12 +356,11 @@ function Home(props) {
                                 src="images/Sign-up-logo.png"
                                 alt="profile-in-div"
                             />
-                            <span className="user-name">{props.user.userName}</span>
+                            <span className="user-name">{sessionStorage.getItem("name")}</span>
                         </div>
                         <form onSubmit={submit}>
                             <div className="enter-question">
                                 <textarea
-                                    onClick={popUp}
                                     onChange={handleChange}
                                     value={homeData.questions}
                                     required
@@ -347,8 +369,9 @@ function Home(props) {
                                     type="text"
                                     placeholder="Ask a question..."
                                 />
-                                <select name="branch" className="branch-select btn btn-outline-primary" onChange={handleChange} value={homeData.brach}>
-                                    <option value="all">Branch</option>
+                                <select name="branch" required className="branch-select btn select-input" onChange={handleChange} value={homeData.branch}>
+                                    <option value="">Branch</option>
+                                    <option value="General">General</option>
                                     <option value="CSE/IT">CSE/IT</option>
                                     <option value="ME">ME</option>
                                     <option value="ECE">ECE</option>
@@ -374,16 +397,9 @@ function Home(props) {
                             userName={serverData.userName}
                             question={serverData.questions}
                             answer={serverData.answers}
-                            user={props.user}
                             timeAsked={serverData.timeAsked}
+                            branch={serverData.branch}
                             answerSubmitted={checkSubmitted}
-                        // answer={serverData.answers.map((answers,index)=>(
-                        //   <div className="answer">
-                        //     {/* key={index}
-                        //     id={index} */}
-                        //     {answers.answerByuser}
-                        //   </div>
-                        // ))}
                         />
                     ))}
                 </div>
